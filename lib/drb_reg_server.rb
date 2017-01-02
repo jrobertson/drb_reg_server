@@ -10,12 +10,16 @@ require 'dws-registry'
 
 class DWSRegistryWrapper
 
-  def initialize(filepath)
-    @reg = DWSRegistry.new filepath
+  def initialize(filename)
+    
+    @filename = filename
+    load_reg()
+    
   end
 
-  def delete_key(path)
-    @reg.delete_key path
+  def delete_key(key)
+    r = @reg.delete_key key
+    r ? 'key deleted' : 'key not found'
   end
 
   def get_key(path, auto_detect_type: false)
@@ -23,14 +27,17 @@ class DWSRegistryWrapper
     e.xml
   end
 
-  def get_keys(path)
+  def get_keys(key)
+    
     recordset = @reg.get_keys(key)
-
-    if recordset then
-      recordset.to_doc(root: 'recordset').root.xml
-    else
-      nil
-    end    
+    return unless recordset
+    
+    recordset.to_doc(root: 'recordset').root.xml
+  
+  end
+  
+  def refresh()
+    load_reg()
   end
 
   def set_key(path, value)
@@ -39,7 +46,20 @@ class DWSRegistryWrapper
   end
 
   def xpath(xpath)
+    
+    recordset = @reg.xpath(xpath)
+    return unless recordset
+    
+    recordset.to_doc(root: 'recordset').root.xml          
+    
   end
+
+  private
+  
+  def load_reg()
+    @reg = DWSRegistry.new(@filename)    
+  end
+    
 end
 
 class DRbRegServer
@@ -59,3 +79,4 @@ class DRbRegServer
   end
 
 end
+
