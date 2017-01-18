@@ -1,5 +1,9 @@
 # Introducing the drb_reg_server gem
 
+## Example usage
+
+    require 'drb_reg_server'
+
     DRbRegServer.new('/home/james/da2/registry/registry.xml', host: '0.0.0.0').start
 
 The above statement would start a DRb server running the DWS-registry gem on port 59500.
