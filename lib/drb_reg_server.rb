@@ -36,6 +36,10 @@ class DWSRegistryWrapper
   
   end
   
+  def import(s)
+    @reg.import(s)    
+  end  
+  
   def refresh()
     load_reg()
   end

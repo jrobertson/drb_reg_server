@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'drb_reg_server'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.summary = 'Provides a DWS_registry service from a DRb server'
   s.authors = ['James Robertson']
   s.files = Dir['lib/drb_reg_server.rb']
