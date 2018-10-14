@@ -7,7 +7,6 @@ require 'drb'
 require 'dws-registry'
 
 
-
 class DWSRegistryWrapper
 
   def initialize(filename)
@@ -34,6 +33,10 @@ class DWSRegistryWrapper
     
     recordset.to_doc(root: 'recordset').root.xml
   
+  end
+  
+  def gem_register(gemfile)    
+    @reg.gem_register(gemfile)
   end
   
   def import(s)
@@ -83,4 +86,3 @@ class DRbRegServer
   end
 
 end
-
